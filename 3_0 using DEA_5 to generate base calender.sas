@@ -78,6 +78,6 @@ RUN;
 
 
 
-PROC FREQ DATA=DEA_5;
-TABLE record_vintage;
-RUN;
+/*PROC FREQ DATA=DEA_5;*/
+/*TABLE record_vintage;*/
+/*RUN;*/
