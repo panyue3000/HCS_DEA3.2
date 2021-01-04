@@ -29,7 +29,7 @@ SET CAL_QTR_0;
 BY YEAR QUARTER;
 
 /*********************************REMEMBER TO CHANGE THE YEAR HERE************************************************************************************/
-IF YEAR=2020 THEN DO;
+IF YEAR=LAST.YEAR THEN DO;
 	IF LAST.MONTH/3<last.quarter then delete;
 END;
 run;
@@ -68,7 +68,7 @@ RUN;
 DATA CAL_1;
 SET CAL_0;
 BY YEAR MONTH;
-	IF YEAR=YEAR(TODAY()) THEN DO;
+	IF YEAR=2020 THEN DO;
 /*DELETE YEAR IF MONTH NOT REACH TO 12*/
 		IF LAST.MONTH<12 THEN DO;
 			IF QUARTER=. AND MONTH=. THEN DELETE;
