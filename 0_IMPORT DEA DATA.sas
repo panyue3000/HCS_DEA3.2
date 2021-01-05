@@ -1,5 +1,6 @@
 
 data redivis_export;
+     length record_vintage $ 50;
 /* 
 	SPECIFY THE PATH TO YOUR DOWNLOADED CSV BELOW:
 */
@@ -24,7 +25,7 @@ delimiter = ',' MISSOVER DSD firstobs=2;
 	informat activity $50. ;
 	informat record_vintage $50. ;
 
-
+	
 input 
 	dea_reg_num $
 	business_activity_code $
@@ -62,7 +63,13 @@ input
 
 
 
-
+/*Dec3rd 2020 email from Dan*/
+/*•	In order to assure that we are capturing all the activity 
+	within a month through the new DOJ process, we will be pulling 
+	the data on the 1st of the following month. This means that the
+	12-1 file that was most recently sent should be used as the NOVEMBER 
+	DEA data file. Going forward I will label the files with the month 
+	name to avoid any confusion. */
 
 PROC FORMAT;
 	VALUE $record_vintagel
@@ -100,11 +107,8 @@ PROC FORMAT;
 		"MA20008" = '2020-08'
 		"MA20009" = '2020-09'
 		"MA20010" = '2020-10'
-		"MA20011" = '2020-11'
-		"MA20012" = '2020-12'
-		"MA21001" = '2021-01'
-		"MA21002" = '2021-02'
-		"MA21003" = '2021-03'
+		"cs_active_20201201" = '2020-11'
+		"cs_active_20210104" = '2020-12'
 	;
 	VALUE $activityl
 		"Active" = 'The registrant is authorized to handle controlled substances in the schedules listed'

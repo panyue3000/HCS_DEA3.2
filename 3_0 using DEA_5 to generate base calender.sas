@@ -29,7 +29,7 @@ SET CAL_QTR_0;
 BY YEAR QUARTER;
 
 /*********************************REMEMBER TO CHANGE THE YEAR HERE************************************************************************************/
-IF YEAR=LAST.YEAR THEN DO;
+IF YEAR=2021 THEN DO;
 	IF LAST.MONTH/3<last.quarter then delete;
 END;
 run;
@@ -68,7 +68,7 @@ RUN;
 DATA CAL_1;
 SET CAL_0;
 BY YEAR MONTH;
-	IF YEAR=2020 THEN DO;
+	IF YEAR=2021 THEN DO;
 /*DELETE YEAR IF MONTH NOT REACH TO 12*/
 		IF LAST.MONTH<12 THEN DO;
 			IF QUARTER=. AND MONTH=. THEN DELETE;
@@ -78,6 +78,13 @@ RUN;
 
 
 
-/*PROC FREQ DATA=DEA_5;*/
-/*TABLE record_vintage;*/
-/*RUN;*/
+
+/*TEMPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP  append empty 2020 10 to data*/
+DATA TEMP;
+YEAR=2020;
+MONTH=10;
+RUN;
+
+DATA CAL_1;
+SET CAL_0 TEMP;
+RUN; 
