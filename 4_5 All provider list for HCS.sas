@@ -56,7 +56,7 @@ QUIT;
 
 
 
-libname zipcode "C:\Users\panyue\Box\1 Healing Communities\DATA_NYS\PAN\3.2 DEA\HCS ZIPCODE";
+libname zipcode "C:\Users\panyue\Box\1 Healing Communities\DATA_NYS\PAN\3.2 DEA\Import\HCS ZIPCODE";
 
 
 DATA DEA_3_all;
