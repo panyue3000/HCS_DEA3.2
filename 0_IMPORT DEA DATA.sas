@@ -4,7 +4,7 @@ data redivis_export;
 /* 
 	SPECIFY THE PATH TO YOUR DOWNLOADED CSV BELOW:
 */
-infile 'C:\Users\panyue\Box\1 Healing Communities\DATA_NYS\PAN\3.2 DEA\Import\V1.14\DEA_Controlled_Substances_Act_Registrations.csv' 
+infile 'C:\Users\panyue\Box\1 Healing Communities\DATA_NYS\PAN\3.2 DEA\Import\V1.15\DEA_Controlled_Substances_Act_Registrations.csv' 
 
 
 delimiter = ',' MISSOVER DSD firstobs=2;
@@ -109,6 +109,7 @@ PROC FORMAT;
 		"MA20010" = '2020-10'
 		"cs_active_20201201" = '2020-11'
 		"cs_active_20210104" = '2020-12'
+		"cs_active_20210201" = '2021-01'
 	;
 	VALUE $activityl
 		"Active" = 'The registrant is authorized to handle controlled substances in the schedules listed'
