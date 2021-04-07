@@ -4,7 +4,7 @@ data redivis_export;
 /* 
 	SPECIFY THE PATH TO YOUR DOWNLOADED CSV BELOW:
 */
-infile 'C:\Users\panyue\Box\1 Healing Communities\DATA_NYS\PAN\3.2 DEA\Import\V1.18\ERSATZ_DEA_v_1_6_output.csv' 
+infile 'C:\Users\panyue\Box\1 Healing Communities\DATA_NYS\PAN\3.2 DEA\Import\V1.18\DEA_Controlled_Substances_Act_Registrations.csv'  
 
 
 delimiter = ',' MISSOVER DSD firstobs=2;
