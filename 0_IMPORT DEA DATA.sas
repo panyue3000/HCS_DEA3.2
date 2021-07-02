@@ -113,6 +113,7 @@ PROC FORMAT;
 		"cs_active_20210226" = '2021-02'
 		"cs_active_20210331" = '2021-03'
 		"cs_active_20210430" = '2021-04'
+		"cs_active_20210531" = '2021-05'
 	;
 	VALUE $activityl
 		"Active" = 'The registrant is authorized to handle controlled substances in the schedules listed'
