@@ -23,7 +23,11 @@ delimiter = ',' MISSOVER DSD firstobs=2;
 	informat busines_activity_sub_code $50. ;
 	informat payment_indicator $50. ;
 	informat activity $50. ;
+	informat degree $50. ;
+	informat state_license_number $50. ;
+	informat state_cs_license_number $50. ;
 	informat record_vintage $50. ;
+	
 
 	
 input 
@@ -41,9 +45,11 @@ input
 	busines_activity_sub_code $
 	payment_indicator $
 	activity $
+	degree $
+	state_license_number $
+	state_cs_license_number $
 	record_vintage $
 ;
-
 
 	label dea_reg_num='DEA Registration Number';
 	label business_activity_code='Business Activity Code';
@@ -59,6 +65,9 @@ input
 	label busines_activity_sub_code='Business Activity Sub Code';
 	label payment_indicator='Payment Indicator';
 	label activity='Activity';
+	label degree='Degree';
+	label state_license_number='State License Number';
+	label state_cs_license_number='State CS License Number';
 	label record_vintage='Record Vintage';
 
 
@@ -115,30 +124,7 @@ PROC FORMAT;
 		"cs_active_20210430" = '2021-04'
 		"cs_active_20210531" = '2021-05'
 		"cs_active_20210701" = '2021-06'
-	;
-	VALUE $activityl
-		"Active" = 'The registrant is authorized to handle controlled substances in the schedules listed'
-		"Inactive" = 'The registrant is not authorized to handle controlled substances in any schedule'
-	;
-	VALUE $drug_schedulesl
-		"1" = 'Schedule 1 Controlled Substances'
-		"2" = 'Schedule 2 Narcotic Controlled Substances'
-		"3" = 'Schedule 3 Narcotic Controlled Substances'
-		"4" = 'Schedule 4 Controlled Substances'
-		"5" = ' Schedule 5 Controlled Substances'
-		"2N" = 'Schedule 2N Non-Narcotic Controlled Substances'
-		"3N" = 'Schedule 3N Non-Narcotic Controlled Substances'
-		"L1" = 'List 1 Chemicals'
-	;
-	VALUE $business_activity_codel
-		"0" = 'Chemical Handlers of List 1 (Manufacturer / Distributor / Importer / Exporter)'
-		"A" = 'Pharmacy'
-		"B" = 'Hospital/Clinic'
-		"F" = 'Practiotioner'
-		"G" = 'Teaching institution'
-		"M" = ' Mid-Level Practitioner (the different approved subcategories of MLPs listed under business activity subcodes)'
-		"P" = 'Manufacturer / Distributor / Researcher / Analytical Lab / Importer / Exporter / Reverse Distributor / Narcotic Treatment Program'
-		"R" = 'Manufacturer / Distributor / Researcher / Analytical Lab / Importer / Exporter / Reverse Distributor / Narcotic Treatment Program'
+		"cs_active_20210730" = '2021-07'
 	;
 	VALUE $dea_reg_numl
 		"0" = 'Chemical Handlers of List 1 (Manufacturer / Distributor / Importer / Exporter)'
@@ -150,11 +136,35 @@ PROC FORMAT;
 		"P" = 'Manufacturer / Distributor / Researcher / Analytical Lab / Importer / Exporter / Reverse Distributor / Narcotic Treatment Program'
 		"R" = 'Manufacturer / Distributor / Researcher / Analytical Lab / Importer / Exporter / Reverse Distributor / Narcotic Treatment Program'
 	;
+	VALUE $business_activity_codel
+		"0" = 'Chemical Handlers of List 1 (Manufacturer / Distributor / Importer / Exporter)'
+		"A" = 'Pharmacy'
+		"B" = 'Hospital/Clinic'
+		"F" = 'Practiotioner'
+		"G" = 'Teaching institution'
+		"M" = ' Mid-Level Practitioner (the different approved subcategories of MLPs listed under business activity subcodes)'
+		"P" = 'Manufacturer / Distributor / Researcher / Analytical Lab / Importer / Exporter / Reverse Distributor / Narcotic Treatment Program'
+		"R" = 'Manufacturer / Distributor / Researcher / Analytical Lab / Importer / Exporter / Reverse Distributor / Narcotic Treatment Program'
+	;
+	VALUE $drug_schedulesl
+		"1" = 'Schedule 1 Controlled Substances'
+		"2" = 'Schedule 2 Narcotic Controlled Substances'
+		"3" = 'Schedule 3 Narcotic Controlled Substances'
+		"4" = 'Schedule 4 Controlled Substances'
+		"5" = ' Schedule 5 Controlled Substances'
+		"2N" = 'Schedule 2N Non-Narcotic Controlled Substances'
+		"3N" = 'Schedule 3N Non-Narcotic Controlled Substances'
+		"L1" = 'List 1 Chemicals'
+	;
+	VALUE $activityl
+		"Active" = 'The registrant is authorized to handle controlled substances in the schedules listed'
+		"Inactive" = 'The registrant is not authorized to handle controlled substances in any schedule'
+	;	
 RUN;
 	
 
 data redivis_export;
-	retain dea_reg_num business_activity_code drug_schedules expiration_date name additional_company_info address_1 address_2 city state zip_code busines_activity_sub_code payment_indicator activity record_vintage;
+	retain dea_reg_num business_activity_code drug_schedules expiration_date name additional_company_info address_1 address_2 city state zip_code busines_activity_sub_code payment_indicator activity degree state_license_number state_cs_license_number record_vintage;
 set redivis_export;
     
 
