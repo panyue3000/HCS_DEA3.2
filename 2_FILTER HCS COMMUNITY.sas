@@ -88,6 +88,8 @@ DATA DEA_2;
 'Suffolk'
 
 );
+length record_vintage $100.;
+
 RUN;
 
 PROC FREQ DATA=DEA_2;

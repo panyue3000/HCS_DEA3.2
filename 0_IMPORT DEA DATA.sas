@@ -45,10 +45,11 @@ input
 	busines_activity_sub_code $
 	payment_indicator $
 	activity $
+	record_vintage $
 	degree $
 	state_license_number $
 	state_cs_license_number $
-	record_vintage $
+	
 ;
 
 	label dea_reg_num='DEA Registration Number';
@@ -115,7 +116,8 @@ PROC FORMAT;
 		"MA20007" = '2020-07'
 		"MA20008" = '2020-08'
 		"MA20009" = '2020-09'
-		"MA20010" = '2020-10'
+/*		"MA20010" = '2020-10'*/
+		"cs_active_20201001" = '2020-10'
 		"cs_active_20201201" = '2020-11'
 		"cs_active_20210104" = '2020-12'
 		"cs_active_20210201" = '2021-01'
@@ -126,6 +128,7 @@ PROC FORMAT;
 		"cs_active_20210701" = '2021-06'
 		"cs_active_20210730" = '2021-07'
 		"cs_active_20210901" = '2021-08'
+
 	;
 	VALUE $dea_reg_numl
 		"0" = 'Chemical Handlers of List 1 (Manufacturer / Distributor / Importer / Exporter)'
