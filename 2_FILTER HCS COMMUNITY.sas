@@ -88,7 +88,7 @@ DATA DEA_2;
 'Suffolk'
 
 );
-length record_vintage $100.;
+     length record_vintage $ 50;
 
 RUN;
 
