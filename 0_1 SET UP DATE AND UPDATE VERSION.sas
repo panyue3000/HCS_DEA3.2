@@ -5,7 +5,7 @@
 
 %LET DATE=1021;
 
-%let DEA_VERSION= V1.26;
+%let DEA_VERSION= V1.27;
 
 /*check date*/
 
