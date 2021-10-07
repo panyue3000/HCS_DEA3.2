@@ -45,10 +45,11 @@ input
 	busines_activity_sub_code $
 	payment_indicator $
 	activity $
-	record_vintage $
 	degree $
 	state_license_number $
 	state_cs_license_number $
+    record_vintage $
+
 	
 ;
 
@@ -168,7 +169,9 @@ RUN;
 	
 
 data redivis_export;
-	retain dea_reg_num business_activity_code drug_schedules expiration_date name additional_company_info address_1 address_2 city state zip_code busines_activity_sub_code payment_indicator activity degree state_license_number state_cs_license_number record_vintage;
+	retain dea_reg_num business_activity_code drug_schedules expiration_date name additional_company_info 
+address_1 address_2 city state zip_code busines_activity_sub_code payment_indicator activity 
+degree state_license_number state_cs_license_number record_vintage;
 set redivis_export;
     
 
