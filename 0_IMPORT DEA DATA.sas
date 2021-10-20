@@ -45,10 +45,10 @@ input
 	busines_activity_sub_code $
 	payment_indicator $
 	activity $
+    record_vintage $
 	degree $
 	state_license_number $
 	state_cs_license_number $
-    record_vintage $
 
 	
 ;
