@@ -51,7 +51,8 @@ PROC SQL;
            (
            '1',
            '4',
-           'B'
+           'B',
+		   'K'
            ) ) OR ( T1.BUSINESS_ACTIVITY_CODE = 'M' AND T1.BUSINES_ACTIVITY_SUB_CODE IN 
            (
            'F',
@@ -59,7 +60,9 @@ PROC SQL;
            'H',
            'I',
            'K',
-           'L'
+           'L',
+		   'Q',
+		   'R'
            ) );
 QUIT;
 
