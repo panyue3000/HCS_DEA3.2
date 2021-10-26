@@ -25,6 +25,8 @@ ELSE IF BUSINESS_ACTIVITY_CODE = 'M' AND BUSINES_ACTIVITY_SUB_CODE='R' THEN Deco
 ELSE IF Decode_BA ne '' and BUSINES_ACTIVITY_SUB_CODE IN ('4','H','I') THEN DW='DW-100';
 ELSE IF Decode_BA ne '' and BUSINES_ACTIVITY_SUB_CODE IN ('B','K','L') THEN DW='DW-275';
 
+/*add an additional measure where we count the number of DW/30SW codes?*/
+     IF Decode_BA ne '' and BUSINES_ACTIVITY_SUB_CODE IN ('K','Q','R') THEN DW30_SW='DW30/SW';
 
 RUN;
 
