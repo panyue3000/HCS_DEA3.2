@@ -45,10 +45,10 @@ input
 	busines_activity_sub_code $
 	payment_indicator $
 	activity $
-    record_vintage $
 	degree $
 	state_license_number $
 	state_cs_license_number $
+    record_vintage $
 
 	
 ;
@@ -131,6 +131,7 @@ PROC FORMAT;
 		"cs_active_20210730" = '2021-07'
 		"cs_active_20210901" = '2021-08'
 		"cs_active_20210929" = '2021-09'
+		"cs_active_20211029" = '2021-10'
 	;
 	VALUE $dea_reg_numl
 		"0" = 'Chemical Handlers of List 1 (Manufacturer / Distributor / Importer / Exporter)'
