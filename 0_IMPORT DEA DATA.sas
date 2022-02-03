@@ -134,6 +134,8 @@ PROC FORMAT;
 		"cs_active_20211029" = '2021-10'
 		"cs_active_20211201" = '2021-11'
 		"cs_active_20220103" = '2021-12'
+		"cs_active_20220201" = '2022-01'
+		
 		
 	;
 	VALUE $dea_reg_numl
