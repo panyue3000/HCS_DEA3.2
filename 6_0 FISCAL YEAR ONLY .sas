@@ -72,7 +72,7 @@ PROC SQL;
 		  YEAR,
 		  CASE WHEN SUM_CT EQ . THEN 1
 		       ELSE 0 END AS IsSuppressed,
-		  "This data is from DEA &DEA_VERSION." AS NOTES,
+		  "This data is from DEA &DEA_VERSION. (Fiscal Year)" AS NOTES,
 		  '' AS STRATIFICATION
       FROM DEA_ALL_1_fiscal
       ORDER BY REPORTERID,

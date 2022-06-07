@@ -39,16 +39,16 @@ run;
 /*1 INTERNAL DELIVERY FILE FOR EXCEL */
 /*DEA32_FINAL_EXCEL_092720*/
 
-%macro csv_export (DATA);
+%macro csv_export2 (DATA);
 
 proc export data=&DATA. dbms=CSV
 outfile= %TSLIT (C:\Users\panyue\Box\1 Healing Communities\DATA_NYS\PAN\3.2 DEA\Export\RAW\&DATA..CSV)
 replace;
 run;
 
-%mend csv_export;
+%mend csv_export2;
 
-%csv_export(DEA32_FINAL_EXCEL_&DATE.);
+%csv_export2(DEA32_FINAL_EXCEL_&DATE.);
 
 
 /*1 COMPARISON INTERNAL DELIVERY FILE FOR EXCEL  */
