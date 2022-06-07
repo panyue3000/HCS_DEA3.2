@@ -35,9 +35,9 @@ QUIT;
 
 
 
-DATA DEA_ALL_0_fiscal(drop=sum_ct1);
-SET DEA_Y_fiscal ;
-RUN;
+/*DATA DEA_ALL_0_fiscal(drop=sum_ct1);*/
+/*SET DEA_Y_fiscal ;*/
+/*RUN;*/
 
 
 /*JOIN REPORTER ID*/
@@ -46,7 +46,7 @@ PROC SQL;
    SELECT DISTINCT 
 		  t1.*, 
 		  T2.POP
-      FROM DEA_ALL_0_fiscal t1
+      FROM DEA_Y_fiscal t1
            LEFT JOIN POPEST T2 ON t1.ReporterId=T2.ReporterId AND 
 								  T1.YEAR=T2.YEAR
       ORDER BY T1.STATE,
