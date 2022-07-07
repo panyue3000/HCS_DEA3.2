@@ -20,18 +20,33 @@ ELSE IF BUSINESS_ACTIVITY_CODE = 'M' AND BUSINES_ACTIVITY_SUB_CODE='K' THEN Deco
 ELSE IF BUSINESS_ACTIVITY_CODE = 'M' AND BUSINES_ACTIVITY_SUB_CODE='L' THEN Decode_BA='9.MLP-Physician Assistant DW275';
 ELSE IF BUSINESS_ACTIVITY_CODE = 'M' AND BUSINES_ACTIVITY_SUB_CODE='Q' THEN Decode_BA='4.1 MLP-Nurse Practitioner DW30/SW';
 ELSE IF BUSINESS_ACTIVITY_CODE = 'M' AND BUSINES_ACTIVITY_SUB_CODE='R' THEN Decode_BA='7.1 MLP-Physician Assistant DW30/SW';
+ELSE IF BUSINESS_ACTIVITY_CODE = 'M' AND BUSINES_ACTIVITY_SUB_CODE='S' THEN Decode_BA='7.2 Assistant Physician DW30/SW';
 
-	 IF Decode_BA ne '' and BUSINES_ACTIVITY_SUB_CODE IN ('1','F','G','K','Q','R') THEN DW='DW-30';
-ELSE IF Decode_BA ne '' and BUSINES_ACTIVITY_SUB_CODE IN ('4','H','I') THEN DW='DW-100';
-ELSE IF Decode_BA ne '' and BUSINES_ACTIVITY_SUB_CODE IN ('B','K','L') THEN DW='DW-275';
+	 IF Decode_BA in ('1.Practitioner DW30',
+				      '4.MLP-Nurse Practitioner DW30',
+					  '7.MLP-Physician Assistant DW30',
+					  '1.1 Practitioner DW30/SW',
+					  '4.1 MLP-Nurse Practitioner DW30/SW',
+					  '7.1 MLP-Physician Assistant DW30/SW',
+					  '7.2 Assistant Physician DW30/SW') THEN DW='DW-30';
+
+ELSE IF Decode_BA IN ('2.Practitioner DW100',
+					  '5.MLP-Nurse Practitioner DW100',
+					  '8.MLP-Physician Assistant DW100') THEN DW='DW-100';
+ELSE IF Decode_BA IN ('3.Practitioner DW275',
+					  '6.MLP-Nurse Practitioner DW275',
+					  '9.MLP-Physician Assistant DW275') THEN DW='DW-275';
 
 /*add an additional measure where we count the number of DW/30SW codes?*/
-     IF Decode_BA ne '' and BUSINES_ACTIVITY_SUB_CODE IN ('K','Q','R') THEN DW30_SW='DW30/SW';
+     IF Decode_BA ne IN ('1.1 Practitioner DW30/SW',
+						'4.1 MLP-Nurse Practitioner DW30/SW',
+						'7.1 MLP-Physician Assistant DW30/SW',
+						'7.2 Assistant Physician DW30/SW') THEN DW30_SW='DW30/SW';
 
 RUN;
 
 proc freq data=dea_4;
-tables decode_ba record_vintage county_name2 zip_code county_name2*zip_code;
+tables decode_ba record_vintage county_name2 zip_code county_name2*zip_code deacode_ba*dw ;
 run;
 
 proc freq data=REDIVIS_EXPORT;
@@ -39,7 +54,7 @@ tables BUSINESS_ACTIVITY_CODE*BUSINES_ACTIVITY_SUB_CODE;
 run;
 
 proc freq data=dea_4;
-tables decode_ba BUSINESS_ACTIVITY_CODE BUSINES_ACTIVITY_SUB_CODE dw;
+tables decode_ba BUSINESS_ACTIVITY_CODE BUSINES_ACTIVITY_SUB_CODE dw deacode_ba*dw;
 run;
 
 proc freq data=dea_4;

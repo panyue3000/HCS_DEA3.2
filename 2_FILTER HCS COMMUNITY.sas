@@ -63,6 +63,7 @@ PROC SQL;
            'L',
 		   'Q',
 		   'R'
+		   'S'
            ) );
 QUIT;
 
