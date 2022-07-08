@@ -115,6 +115,7 @@ QUIT;
 
 
 DATA DEA32_FINAL_EXCEL_&DATE.(drop=numerator_temp);
+length dw $50.;
 SET DW30SW_FINAL_EXCEL_1
 	DEA32_FINAL_EXCEL_1 
 	;

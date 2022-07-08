@@ -1,11 +1,17 @@
 
+/*data dea_3_short;*/
+/*set dea_3 (obs=10000);*/
+/*run;*/
 
+proc freq data=dea_3;
+tables BUSINESS_ACTIVITY_CODE BUSINES_ACTIVITY_SUB_CODE;
+run;
 
 
 DATA DEA_4;
 	SET DEA_3;
-	LENGTH DECODE_BA $100.;
-	LENGTH DW $10.;
+	LENGTH DECODE_BA $100;
+	LENGTH DW $10;
 
 	 IF BUSINESS_ACTIVITY_CODE = 'C' AND BUSINES_ACTIVITY_SUB_CODE='1' THEN Decode_BA='1.Practitioner DW30';
 ELSE IF BUSINESS_ACTIVITY_CODE = 'C' AND BUSINES_ACTIVITY_SUB_CODE='4' THEN Decode_BA='2.Practitioner DW100';
@@ -38,7 +44,7 @@ ELSE IF Decode_BA IN ('3.Practitioner DW275',
 					  '9.MLP-Physician Assistant DW275') THEN DW='DW-275';
 
 /*add an additional measure where we count the number of DW/30SW codes?*/
-     IF Decode_BA ne IN ('1.1 Practitioner DW30/SW',
+     IF Decode_BA IN (  '1.1 Practitioner DW30/SW',
 						'4.1 MLP-Nurse Practitioner DW30/SW',
 						'7.1 MLP-Physician Assistant DW30/SW',
 						'7.2 Assistant Physician DW30/SW') THEN DW30_SW='DW30/SW';
@@ -46,7 +52,7 @@ ELSE IF Decode_BA IN ('3.Practitioner DW275',
 RUN;
 
 proc freq data=dea_4;
-tables decode_ba record_vintage county_name2 zip_code county_name2*zip_code deacode_ba*dw ;
+tables decode_ba record_vintage county_name2 zip_code county_name2*zip_code Decode_BA*dw ;
 run;
 
 proc freq data=REDIVIS_EXPORT;
@@ -54,7 +60,8 @@ tables BUSINESS_ACTIVITY_CODE*BUSINES_ACTIVITY_SUB_CODE;
 run;
 
 proc freq data=dea_4;
-tables decode_ba BUSINESS_ACTIVITY_CODE BUSINES_ACTIVITY_SUB_CODE dw deacode_ba*dw;
+tables decode_ba BUSINESS_ACTIVITY_CODE BUSINES_ACTIVITY_SUB_CODE dw 
+	   Decode_BA*dw BUSINESS_ACTIVITY_CODE*BUSINES_ACTIVITY_SUB_CODE*decode_ba;
 run;
 
 proc freq data=dea_4;
