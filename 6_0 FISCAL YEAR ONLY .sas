@@ -10,6 +10,10 @@ format fiscal_date yymms7.;
 
 run;
 
+proc freq data=dea_5_fiscal;
+table name dea_reg_num;
+run;
+
 
 /**************************************fiscal YEAR**********************************/
 PROC SQL;
@@ -22,7 +26,7 @@ PROC SQL;
 /*		  . AS MONTH,*/
           /* SUM_of_COUNT */
 /*            (SUM(t1.COUNT)) FORMAT=BEST32. AS SUM_CT,*/
-			count (distinct name) as sum_ct
+			count (distinct dea_reg_num) as sum_ct
 /*			count (distinct address_1) as count_address_1,*/
 /*			count (distinct dea_reg_num) as count_dea_reg_num*/
       FROM DEA_5_fiscal t1

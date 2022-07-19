@@ -124,10 +124,22 @@ ELSE IF BUSINESS_ACTIVITY_CODE = 'M' AND BUSINES_ACTIVITY_SUB_CODE='K' THEN Deco
 ELSE IF BUSINESS_ACTIVITY_CODE = 'M' AND BUSINES_ACTIVITY_SUB_CODE='L' THEN Decode_BA='9.MLP-Physician Assistant DW275';
 ELSE IF BUSINESS_ACTIVITY_CODE = 'M' AND BUSINES_ACTIVITY_SUB_CODE='Q' THEN Decode_BA='4.1 MLP-Nurse Practitioner DW30/SW';
 ELSE IF BUSINESS_ACTIVITY_CODE = 'M' AND BUSINES_ACTIVITY_SUB_CODE='R' THEN Decode_BA='7.1 MLP-Physician Assistant DW30/SW';
+ELSE IF BUSINESS_ACTIVITY_CODE = 'M' AND BUSINES_ACTIVITY_SUB_CODE='S' THEN Decode_BA='7.2 Assistant Physician DW30/SW';
 
-	 IF Decode_BA ne '' and BUSINES_ACTIVITY_SUB_CODE IN ('1','F','G','K','Q','R') THEN DW='DW-30';
-ELSE IF Decode_BA ne '' and BUSINES_ACTIVITY_SUB_CODE IN ('4','H','I') THEN DW='DW-100';
-ELSE IF Decode_BA ne '' and BUSINES_ACTIVITY_SUB_CODE IN ('B','K','L') THEN DW='DW-275';
+	 IF Decode_BA in ('1.Practitioner DW30',
+				      '4.MLP-Nurse Practitioner DW30',
+					  '7.MLP-Physician Assistant DW30',
+					  '1.1 Practitioner DW30/SW',
+					  '4.1 MLP-Nurse Practitioner DW30/SW',
+					  '7.1 MLP-Physician Assistant DW30/SW',
+					  '7.2 Assistant Physician DW30/SW') THEN DW='DW-30';
+
+ELSE IF Decode_BA IN ('2.Practitioner DW100',
+					  '5.MLP-Nurse Practitioner DW100',
+					  '8.MLP-Physician Assistant DW100') THEN DW='DW-100';
+ELSE IF Decode_BA IN ('3.Practitioner DW275',
+					  '6.MLP-Nurse Practitioner DW275',
+					  '9.MLP-Physician Assistant DW275') THEN DW='DW-275';
 
 
 RUN;

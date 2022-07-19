@@ -7,7 +7,7 @@ PROC SQL;
 		  t1.ReporterId,
 		  YEAR_RECORD_VIN AS YEAR,
           /* SUM_of_COUNT */
-			count (distinct name) as sum_ct
+			count (distinct dea_reg_num) as sum_ct
       FROM DEA_5 t1
       GROUP BY T1.DW,
 			   T1.STATE,
@@ -29,7 +29,7 @@ PROC SQL;
 		  YEAR_RECORD_VIN AS YEAR,
 		  INPUT(substr(CAT(T1.QUARTER_RECORD_VIN),2,1),1.) AS QUARTER,
           /* SUM_of_COUNT */
-			count (distinct name) as sum_ct
+			count (distinct dea_reg_num) as sum_ct
       FROM DEA_5 t1
       GROUP BY T1.DW,
 			   T1.STATE,

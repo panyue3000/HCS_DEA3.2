@@ -6,7 +6,7 @@ PROC SQL;
 			FROM DEA_5 t1
       ORDER BY T1.STATE,
 			   t1.reporterid,
-			   T1.NAME,
+			   T1.dea_reg_num,
 			   T1.DW,
                t1.YEAR_RECORD_VIN,
 			   T1.MONTH_RECORD_VIN
@@ -28,7 +28,7 @@ PROC SQL;
 		  . AS MONTH,
           /* SUM_of_COUNT */
 /*            (SUM(t1.COUNT)) FORMAT=BEST32. AS SUM_CT,*/
-			count (distinct name) as sum_ct
+			count (distinct dea_reg_num) as sum_ct
 /*			count (distinct address_1) as count_address_1,*/
 /*			count (distinct dea_reg_num) as count_dea_reg_num*/
       FROM DEA_5 t1
@@ -52,7 +52,7 @@ PROC SQL;
 /* 		  MONTH_RECORD_VIN AS MONTH,*/
           /* SUM_of_COUNT */
             (SUM(t1.COUNT)) FORMAT=BEST32. AS SUM_CT1,
-			count (distinct name) as sum_ct
+			count (distinct dea_reg_num) as sum_ct
      FROM DEA_5 t1
       GROUP BY T1.STATE,
 			   t1.reporterid,
@@ -71,7 +71,7 @@ PROC SQL;
 		  MONTH_RECORD_VIN AS MONTH,
           /* SUM_of_COUNT */
             (SUM(t1.COUNT)) FORMAT=BEST32. AS SUM_CT,
-			count (distinct name) as sum_ct1
+			count (distinct dea_reg_num) as sum_ct1
       FROM DEA_5 t1
       GROUP BY T1.STATE,
 			   t1.reporterid,
