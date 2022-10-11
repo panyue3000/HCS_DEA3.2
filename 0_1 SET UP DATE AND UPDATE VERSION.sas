@@ -3,9 +3,9 @@
 
 /*SET UP DATE AND UPDATE VERSION */
 
-%LET DATE=0922;
+%LET DATE=1022;
 
-%let DEA_VERSION= V1.41;
+%let DEA_VERSION= V1.42;
 
 /*check date*/
 
