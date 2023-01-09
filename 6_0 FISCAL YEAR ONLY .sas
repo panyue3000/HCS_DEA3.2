@@ -167,13 +167,44 @@ run;
 
 DATA DEA32_FINAL_fiscal_&DATE.;
 SET DEA_ALL_2_fiscal;
+
+/*there were no one in the dataset with a waiver at that level?  If so, we should recode to zero. */
+if NUMERATOR=. then numerator=0;
+
+/*0 remove year 2023 if we are still in 2022*/
 IF YEAR=2023 THEN DELETE;
+
+/*1.)	for the Fiscal year we need to put the year in a 2 year format: */
+if Year eq 2023 then year=20222023;
+if Year eq 2022 then year=20212022;
+if Year eq 2021 then year=20202021;
+if Year eq 2020 then year=20192020;
+if Year eq 2019 then year=20182019;
+if Year eq 2018 then year=20172018;
+
+/*2.)	RTI does not recognize our additional areas, so for RTI we need to skip those recordids*/
+if reporterid in ('0368','0369','0370','0371','0372','0373') then delete;
+/*3.)	RTI has decided that we should not pass population denominators since that is a new measure itself so;*/
+Denominator=.;
+
+
 RUN;
+
+
+
+
 
 proc freq data=DEA32_FINAL_fiscal_&DATE.;
 tables year*measureid;
 run;
 
+data DEA32_FINAL_comb_fiscal_&DATE.;
+set DEA32_FINAL_fiscal_&DATE. DEA32_FINAL_&DATE.;
+run;
+
+
 /*EXPORT */
 
 %csv_export(DEA32_FINAL_fiscal_&DATE.);
+
+%csv_export(DEA32_FINAL_comb_fiscal_&DATE.);
