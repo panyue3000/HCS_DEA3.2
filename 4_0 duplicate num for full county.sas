@@ -30,4 +30,9 @@ RUN;
 
 DATA DEA_5;
 SET DEA_4_3 DEA_4_1;
+dw_num=input(scan(dw, 2, '-'), comma9.);
 RUN;
+
+
+
+

@@ -1,3 +1,5 @@
+/**************************************YEAR**********************************/
+
 /*ORDER BY STATE, COUNTY, YEAR, MONTH*/
 PROC SQL;
    CREATE TABLE DEA_5_ORDER AS 
@@ -11,13 +13,10 @@ PROC SQL;
                t1.YEAR_RECORD_VIN,
 			   T1.MONTH_RECORD_VIN
 
-
 ;
 QUIT;
 
 
-
-/**************************************YEAR**********************************/
 PROC SQL;
    CREATE TABLE DEA_Y AS 
    SELECT DISTINCT 

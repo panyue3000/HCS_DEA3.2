@@ -1,4 +1,40 @@
+/**************************************YEAR and quarter**********************************/
+/*add 01/10/2023*/
+/*need to remove those provider who has moved and have multiple waiver (only reserve the highest 275>100>30)*/
+/*this affect only year and quarter*/
+
 /**************************************YEAR**********************************/
+PROC SQL;
+   CREATE TABLE DEA_Y_0 AS 
+   SELECT DISTINCT 
+   		  T1.STATE,
+		  t1.reporterid,
+		  YEAR_RECORD_VIN,
+/*		  MONTH_RECORD_VIN,*/
+		  . AS MONTH,
+          /* SUM_of_COUNT */
+/*            (SUM(t1.COUNT)) FORMAT=BEST32. AS SUM_CT,*/
+		    t1.dw,
+		    t1.dw_num,
+			t1.dea_reg_num
+/*			count (distinct address_1) as count_address_1,*/
+/*			count (distinct dea_reg_num) as count_dea_reg_num*/
+      FROM DEA_5 t1
+      order BY t1.reporterid,
+			   t1.YEAR_RECORD_VIN,
+			   t1.dea_reg_num, 
+			   t1.dw_num desc
+/*			   T1.MONTH_RECORD_VIN*/
+;
+QUIT;
+
+data DEA_Y_1;
+set DEA_Y_0;
+by reporterid YEAR_RECORD_VIN dea_reg_num descending dw_num;
+if first.dea_reg_num;
+run;
+
+
 PROC SQL;
    CREATE TABLE DEA_DW_Y AS 
    SELECT DISTINCT 
@@ -8,7 +44,7 @@ PROC SQL;
 		  YEAR_RECORD_VIN AS YEAR,
           /* SUM_of_COUNT */
 			count (distinct dea_reg_num) as sum_ct
-      FROM DEA_5 t1
+      FROM DEA_Y_1 t1
       GROUP BY T1.DW,
 			   T1.STATE,
 			   t1.ReporterId,
@@ -21,21 +57,52 @@ QUIT;
 
 /***********************************************QUARTER*******************************************/
 PROC SQL;
+   CREATE TABLE DEA_qtr_0 AS 
+   SELECT DISTINCT 
+   		  T1.STATE,
+		  t1.reporterid,
+		  YEAR_RECORD_VIN,
+		  INPUT(substr(CAT(T1.QUARTER_RECORD_VIN),2,1),1.) AS QUARTER,
+		  . AS MONTH,
+          /* SUM_of_COUNT */
+/*            (SUM(t1.COUNT)) FORMAT=BEST32. AS SUM_CT,*/
+		    t1.dw,
+		    t1.dw_num,
+			t1.dea_reg_num
+/*			count (distinct address_1) as count_address_1,*/
+/*			count (distinct dea_reg_num) as count_dea_reg_num*/
+      FROM DEA_5 t1
+      order BY t1.reporterid,
+			   t1.YEAR_RECORD_VIN,
+			   calculated quarter,
+			   t1.dea_reg_num, 
+			   t1.dw_num desc
+/*			   T1.MONTH_RECORD_VIN*/
+;
+QUIT;
+
+data DEA_qtr_1;
+set DEA_qtr_0;
+by reporterid YEAR_RECORD_VIN quarter dea_reg_num descending dw_num;
+if first.dea_reg_num;
+run;
+
+PROC SQL;
    CREATE TABLE DEA_DW_QTR AS 
    SELECT DISTINCT
 	      T1.DW,
    		  T1.STATE,
 	      t1.ReporterId,
-		  YEAR_RECORD_VIN AS YEAR,
-		  INPUT(substr(CAT(T1.QUARTER_RECORD_VIN),2,1),1.) AS QUARTER,
+		  T1.YEAR_RECORD_VIN AS YEAR,
+		  T1.QUARTER,
           /* SUM_of_COUNT */
 			count (distinct dea_reg_num) as sum_ct
-      FROM DEA_5 t1
+      FROM DEA_qtr_1 t1
       GROUP BY T1.DW,
 			   T1.STATE,
 			   t1.reporterid,
                t1.YEAR_RECORD_VIN,
-			   calculated quarter
+			   T1.quarter
 ;
 QUIT;
 
