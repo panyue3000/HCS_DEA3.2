@@ -1,57 +1,11 @@
 
-data redivis_export;
-/*
-	SPECIFY THE PATH TO YOUR DOWNLOADED CSV BELOW:
-*/
-infile 'C:\Users\panyue\Box\1 Healing Communities\DATA_NYS\PAN\3.2 DEA\HCS deliveries\RAW\DEA32_FINAL_comb_fiscal_0123.csv'
-
-delimiter = ',' MISSOVER DSD firstobs=2;
-
-
-	informat REPORTERID $50. ;
-	informat MEASUREID $50. ;
-	informat NUMERATOR 32. ;
-	informat DENOMINATOR 32. ;
-	informat MONTH 32. ;
-	informat QUARTER 32. ;
-	informat YEAR 32. ;
-	informat IsSuppressed 32. ;
-	informat NOTES $50. ;
-	informat STRATIFICATION $50. ;
-	
-
-input
-	REPORTERID $
-	MEASUREID
-	NUMERATOR
-	DENOMINATOR
-	MONTH 
-	QUARTER 
-	YEAR
-	IsSuppressed
-	NOTES $
-	STRATIFICATION $
-;
-
-
-
+proc sort data=DEA32_FINAL_comb_fiscal_&DATE.;
+by reporterid year month quarter;
 run;
 
-
-
 data DEA;
-	retain REPORTERID MEASUREID month quarter NUMERATOR DENOMINATOR  YEAR IsSuppressed NOTES STRATIFICATION;
-set redivis_export;
-
-	format MONTH BEST32. ;
-	format QUARTER BEST32. ;
-	format NUMERATOR BEST32. ;
-	format DENOMINATOR BEST32. ;
-	format YEAR BEST32. ;
-	format IsSuppressed BEST32. ;
-
-
-RUN;
+set DEA32_FINAL_comb_fiscal_&DATE.;
+run;
 
 /*  Following was to check that FY data was what I thought it was
 Data StudyYr;
