@@ -4,7 +4,7 @@
 data dea_5_fiscal;
 set dea_5;
 
-fiscal_date=intnx('month', mdy(month_record_vin,01,year_record_vin), 7);
+fiscal_date=intnx('month', mdy(month_record_vin,01,year_record_vin), 6);
 
 format fiscal_date yymms7.;
 
