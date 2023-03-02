@@ -208,8 +208,12 @@ RUN;
 QUIT;
 
 
+data test_1;
+set REDIVIS_EXPORT;
+where record_vintage='2023-01';
+run;
 
-PROC FREQ DATA=REDIVIS_EXPORT;
+PROC FREQ DATA=test_1 (obs=1000); 
 TABLES  BUSINESS_ACTIVITY_CODE 
 		busines_activity_sub_code	
 		activity

@@ -67,6 +67,68 @@ PROC SQL;
            ) );
 QUIT;
 
+/*check for 2023-01 data*/
+
+PROC SQL;
+   CREATE TABLE WORK.FILTER_FOR_DEA_1 AS 
+   SELECT t1.record_vintage, 
+          t1.state, 
+          t1.name, 
+          t1.address_1, 
+          t1.address_2, 
+          t1.activity, 
+          t1.drug_schedules, 
+          t1.business_activity_code, 
+          t1.dea_reg_num, 
+          t1.payment_indicator, 
+          t1.expiration_date, 
+          t1.additional_company_info, 
+          t1.city, 
+          t1.zip_code, 
+          t1.busines_activity_sub_code, 
+          t1.COUNTY_NAME2
+      FROM WORK.DEA_1 t1
+      WHERE t1.state = 'NY' 
+/*			and t1.record_vintage='2023-01'*/
+;
+QUIT;
+
+proc freq data=FILTER_FOR_DEA_1;
+table record_vintage;
+run;
+
+PROC SQL;
+   CREATE TABLE WORK.FILTER_FOR_DEA_2 AS 
+   SELECT t1.record_vintage, 
+          t1.state, 
+          t1.name, 
+          t1.address_1, 
+          t1.address_2, 
+          t1.activity, 
+          t1.drug_schedules, 
+          t1.business_activity_code, 
+          t1.dea_reg_num, 
+          t1.payment_indicator, 
+          t1.expiration_date, 
+          t1.additional_company_info, 
+          t1.city, 
+          t1.zip_code, 
+          t1.busines_activity_sub_code
+      FROM WORK.redivis_export t1
+      WHERE t1.state = 'NY' 
+			and t1.record_vintage='2023-01'
+;
+QUIT;
+
+proc freq data=FILTER_FOR_DEA_2;
+table record_vintage;
+run;
+
+/*filter on RTI website using query*/
+/*SELECT * FROM `dea_controlled_substances_act_registrations:py8y`*/
+/*WHERE record_vintage = 'cs_active_20230203' and state = 'NY' and business_activity_code in ('C', 'M')*/
+
+
 /*FILTER SELECTED COUNTY*/
 DATA DEA_2;
 	SET DEA_1;
@@ -121,6 +183,7 @@ MONTH_RECORD_VIN=input(SUBSTR(VVALUE(record_vintage),6,2),2.);
 /*WHERE activity = 'A';*/
 
 RUN;
+
 
 
 /*CHECK*/
